@@ -65,13 +65,27 @@ const yearOrderedMovies = orderByYear(movies);
 console.log(yearOrderedMovies);
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) {}
+function orderAlphabetically(movies) {
+  return movies.sort((a, b) => a.title.localeCompare(b.title)).slice(0, 20);
+}
+
+const ordered20movies = orderAlphabetically(movies);
+console.log(ordered20movies);
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+                function turnHoursToMinutes(duration) {
+                  return hours * 60;
+                }
+
+                const convertedDurations = movies.map(movie =>
+                  turnHoursToMinutes(movie.duration)
+                );
+                console.log(convertedDurations);
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg(moviesArray) {}
+function bestYearAvg(movies) {
+  
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
