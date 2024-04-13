@@ -1,13 +1,40 @@
+import { movies } from './data.js';
+
 // Iteration 1: All directors? - Get the array of all directors.
 // _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
 // How could you "clean" a bit this array and make it unified (without duplicates)?
-function getAllDirectors(moviesArray) {}
+
+function getAllDirectors(movies) {
+  const allDirectors = movies.map((movie) => movie.director);
+  const uniqueDirectors = new Set(allDirectors);
+  return Array.from(uniqueDirectors);
+}
+console.log(getAllDirectors(movies));
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
-function howManyMovies(moviesArray) {}
+function howManyMovies(movies) {
+  return movies.filter(function (movie) {
+    return (
+      movie.director === 'Steven Spielberg' && movie.genre.includes('Drama')
+    );
+  });
+}
+console.log(howManyMovies(movies));
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage(moviesArray) {}
+function scoresAverage(movies) {
+  let scoreSum = 0;
+  for (let i = 0; i < movies.length; i++) {
+    scoreSum += movies[i].score;
+  }
+  return scoreSum / movies.length;
+}
+
+function shortenScoreSum(number) {
+  return parseFloat(number.toFixed(2))
+}
+const avgScore = scoresAverage(movies)
+console.log(shortenScoreSum(avgScore));
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(moviesArray) {}
@@ -24,8 +51,6 @@ function turnHoursToMinutes(moviesArray) {}
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
 
-
-
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
 if (typeof module !== 'undefined') {
@@ -37,6 +62,6 @@ if (typeof module !== 'undefined') {
     orderByYear,
     orderAlphabetically,
     turnHoursToMinutes,
-    bestYearAvg,
+    bestYearAvg
   };
 }
