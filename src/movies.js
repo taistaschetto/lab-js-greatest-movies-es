@@ -73,19 +73,53 @@ const ordered20movies = orderAlphabetically(movies);
 console.log(ordered20movies);
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-                function turnHoursToMinutes(duration) {
-                  return hours * 60;
-                }
+function turnHoursToMinutes(movies) {
+  const convertedMovies = movies.map((movie) => {
+    const duration = movie.duration;
+    const hoursMatch = duration.match(/(\d+)h/);
+    const minutesMatch = duration.match(/(\d+)min/);
 
-                const convertedDurations = movies.map(movie =>
-                  turnHoursToMinutes(movie.duration)
-                );
-                console.log(convertedDurations);
+    const hours = hoursMatch ? parseInt(hoursMatch[1], 10) : 0;
+    const minutes = minutesMatch ? parseInt(minutesMatch[1], 10) : 0;
+
+    const totalMinutes = hours * 60 + minutes;
+    return {
+      ...movie,
+      duration: totalMinutes
+    };
+  });
+  return convertedMovies;
+}
+
+const convertedMovies = turnHoursToMinutes(movies);
+console.log(convertedMovies);
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(movies) {
-  
+  const yearScores = movies.reduce((acc, movie) => {
+    const year = movie.year;
+    const score = movie.score;
+    acc[year] = acc[year] || { totalScore: 0, movieCount: 0 };
+    acc[year].totalScore += score;
+    acc[year].movieCount++;
+    return acc;
+  });
+
+  let bestYear;
+  let bestAverage = 0;
+
+  for (const year in yearScores) {
+    const averageScore =
+      yearScores[year].totalScore / yearScores[year].movieCount;
+    if (averageScore > bestAverage) {
+      bestYear = year;
+      bestAverage = averageScore;
+    }
+  }
+  return `The best year was ${bestYear} with an average score of ${bestAverage}.`;
 }
+const result = bestYearAvg(movies);
+console.log(result);
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
